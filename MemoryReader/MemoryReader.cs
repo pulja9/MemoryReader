@@ -49,9 +49,9 @@ namespace MemoryReader
                 Process process = Process.GetProcessesByName(processName)[0];
                 processHandleR = OpenProcess(PROCESS_WM_READ | PROCESS_WM_WRITE | PROCESS_WM_OPERATION, false, process.Id);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception(ex.ToString());
+                throw new Exception("Process " + name + " not found, or you dont have the necessary rights!");
             }
 
         }
