@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace MemoryReader
+namespace FantomMemoryReader
 {
     public class MemoryReader
     {
@@ -47,20 +47,27 @@ namespace MemoryReader
             {
                 name = processName;
                 Process process = Process.GetProcessesByName(processName)[0];
+                process.Exited += Process_Exited;
                 processHandleR = OpenProcess(PROCESS_WM_READ | PROCESS_WM_WRITE | PROCESS_WM_OPERATION, false, process.Id);
             }
             catch (Exception)
             {
                 throw new Exception("Process " + name + " not found, or you dont have the necessary rights!");
             }
-
         }
+
+        private void Process_Exited(object sender, EventArgs e)
+        {
+            processHandleR = IntPtr.Zero;
+        }
+
         public override string ToString()
         {
             return "Current process: " + name;
         }
         private bool isRunning()
         {
+
             if (processHandleR == IntPtr.Zero)
             {
                 throw new Exception("Process " + name + " is not running!");
@@ -320,8 +327,8 @@ namespace MemoryReader
 }
 
 /*
-         Created by Dragan Puljić aka Serbian FantomZ
+         Created by Dragan Puljić aka Fantom
          Contact: srbfantom@gmail.com 
-         07.10.2015 1:21AM
+         13.10.2017 13:37PM
          Version: V1.0 Public
 */

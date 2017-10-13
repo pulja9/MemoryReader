@@ -7,8 +7,8 @@
     <ProjectGuid>{19374E0C-42A9-4BB0-8A53-AB3879936FC2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MemoryReader</RootNamespace>
-    <AssemblyName>MemoryReader</AssemblyName>
+    <RootNamespace>FantomMemoryReader</RootNamespace>
+    <AssemblyName>FantomMemoryReader</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
