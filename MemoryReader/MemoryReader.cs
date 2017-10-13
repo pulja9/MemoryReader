@@ -62,7 +62,6 @@ namespace FantomMemoryReader
         }
         private bool isRunning()
         {
-
             if (processHandleR == IntPtr.Zero | process.HasExited == true)
             {
                 throw new Exception("Process " + name + " is not running!");
