@@ -32,6 +32,7 @@ namespace FantomMemoryReader
         private static IntPtr processHandleR;
         #endregion
         #region findProcess
+        private Process process;
         private byte[] buffer;
         private String name = "";
         private int bytesRead;
@@ -46,19 +47,13 @@ namespace FantomMemoryReader
             try
             {
                 name = processName;
-                Process process = Process.GetProcessesByName(processName)[0];
-                process.Exited += Process_Exited;
+                process = Process.GetProcessesByName(processName)[0];
                 processHandleR = OpenProcess(PROCESS_WM_READ | PROCESS_WM_WRITE | PROCESS_WM_OPERATION, false, process.Id);
             }
             catch (Exception)
             {
                 throw new Exception("Process " + name + " not found, or you dont have the necessary rights!");
             }
-        }
-
-        private void Process_Exited(object sender, EventArgs e)
-        {
-            processHandleR = IntPtr.Zero;
         }
 
         public override string ToString()
@@ -68,7 +63,7 @@ namespace FantomMemoryReader
         private bool isRunning()
         {
 
-            if (processHandleR == IntPtr.Zero)
+            if (processHandleR == IntPtr.Zero | process.HasExited == true)
             {
                 throw new Exception("Process " + name + " is not running!");
             }
